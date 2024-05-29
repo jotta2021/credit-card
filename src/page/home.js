@@ -78,7 +78,9 @@ setLoading(false)
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
-        <ArrowIcon name="arrow-back-ios" size={24} color={"black"} />
+        <ArrowIcon name="arrow-back-ios" size={24} color={"black"}
+        onPress={()=> setConfirmed(false)}
+        />
         <Text style={styles.titleHeader}>PAYMENT DETAILS</Text>
       </View>
 
