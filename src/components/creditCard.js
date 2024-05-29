@@ -111,7 +111,7 @@ export default function CreditCard({
                         justifyContent: "center",
                       }}
                     >
-                      <Text style={styles.name}>{name}</Text>
+                      <Text style={styles.name}>{name.toUpperCase()}</Text>
                       {expired !== "" ? (
                         <Text
                           style={{

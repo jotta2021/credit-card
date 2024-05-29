@@ -10,6 +10,7 @@ import {
   ScrollView,
   FlatList,
   Dimensions,
+  ActivityIndicator,
 } from "react-native";
 import { styles } from "./styles";
 import { useState } from "react";
@@ -21,6 +22,7 @@ import { Keyboard } from "react-native";
 //icon arrow
 import ArrowIcon from "react-native-vector-icons/MaterialIcons";
 import Question from 'react-native-vector-icons/AntDesign'
+import Verify from 'react-native-vector-icons/MaterialIcons'
 
 export default function Home() {
   //controla se será mostrado a parte de trás ou frente do cartão
@@ -32,7 +34,10 @@ export default function Home() {
   const [inputAtive, setInputAtive] = useState("");
 
   const [onFlip, setOnFlip] = useState(false);
- 
+
+  //quando o cartão for adicionado ele seta essa const
+  const [confirmed,setConfirmed] = useState(false)
+ const [loading,setLoading] = useState(false)
 
 
   // no momento de digitar o cvv , passa por essa função
@@ -58,13 +63,33 @@ if(value==='cvc'){
 console.log(back)
   }
 
+
+
+  function Save(){
+    if(card!==''&& name!=='' && expired!=='' && cvc!==''){
+  setLoading(true)
+  setTimeout(()=> {
+setLoading(false)
+    setConfirmed(true)
+  },3000)
+   
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.header}>
         <ArrowIcon name="arrow-back-ios" size={24} color={"black"} />
         <Text style={styles.titleHeader}>PAYMENT DETAILS</Text>
       </View>
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
+
+      {
+        confirmed ? (
+          <View style={{alignItems:'center' , justifyContent:'center' ,marginTop:'50%'}}>
+<Verify name="verified" color={'green'} size={120}/>
+<Text style={{fontWeight:'500',fontSize:18}}>Cartão adicionado!</Text>
+          </View> 
+        ) :
+        <KeyboardAvoidingView style={{ flex: 1 }} behavior="height">
         <TouchableWithoutFeedback
           onPress={() => {
             Keyboard.dismiss();
@@ -147,7 +172,15 @@ console.log(back)
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
-      <View
+
+
+      }
+    
+    {
+      confirmed ===false ?
+
+
+          <View
         style={{
           alignItems: "center",
           position: "absolute",
@@ -156,7 +189,9 @@ console.log(back)
           top: 600,
         }}
       >
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button}
+        onPress={Save}
+        >
           <Text
             style={{
               color: "white",
@@ -164,10 +199,16 @@ console.log(back)
               fontSize: 16,
             }}
           >
-            Próximo
+            {
+              loading ? <ActivityIndicator size={'small'} color={'white'}/> :
+               'Salvar cartão'
+            }
+           
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> : ''
+    }
+  
     </SafeAreaView>
   );
 }
