@@ -1,7 +1,8 @@
 Readme do Aplicativo de Cadastro de Cartão de Crédito - React native
 Bem-vindo ao aplicativo de cadastro de cartão de crédito! se trata de uma aplicação simples e objetiva onde apliquei alguns conhecimentos com animação e estilização
 
-Visualização: aguardando
+<img src='https://i.ibb.co/SwjRfrJ/Screenshot-3.png'  width=100/>
+<img src='https://i.ibb.co/QCXFmCH/Screenshot-2.png'  width=100/>
 
 Funcionalidades Principais
 Formulário de Cadastro de Cartão de Crédito: O aplicativo apresenta um formulário intuitivo para o cadastro de cartões de crédito, incluindo campos para número do cartão, data de validade e CVV.
